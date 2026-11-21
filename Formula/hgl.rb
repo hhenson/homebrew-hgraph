@@ -8,6 +8,11 @@ class Hgl < Formula
   sha256 "559854840c55ae47f616032634da3dcd24418b742acce05b795349ff49de36db"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.0"
+    sha256 cellar: :any, arm64_tahoe: "b3a1d2fbaf06dc2eadac6769823da65a82979a88306a53df662f5cd3fbd047b3"
+  end
+
   depends_on arch: :arm64
   depends_on "cmake"
   depends_on macos: :tahoe
