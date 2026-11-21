@@ -7,9 +7,10 @@ compiler, `hgl`, and what it is built on.
 brew install hhenson/hgraph/hgl
 ```
 
-The formula installs a prebuilt `hgl` with the hgraph C++ SDK it builds
-programs against. Nothing is compiled to install it. Running a program on
-the C++ target compiles it and requires Apple Clang 21 or later.
+The formula installs a prebuilt `hgl` with the hgraph C++ SDK. Homebrew can
+pour the Apple silicon bottle on macOS 26 and compatible newer versions.
+Running a program on the C++ target compiles it with Apple Clang 21 or later
+and uses the CMake and Ninja installed by Homebrew.
 
 | Formula | What it installs | Platforms |
 | --- | --- | --- |
