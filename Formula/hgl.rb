@@ -4,8 +4,8 @@
 class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.1.0/hgl-0.1.0-macos-arm64.tar.gz"
-  sha256 "d55df30495d15a870223358e74b56257d94c7cbb3b1187c3db2ffc48bbff96cb"
+  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.0/hgl-0.2.0-macos-arm64.tar.gz"
+  sha256 "559854840c55ae47f616032634da3dcd24418b742acce05b795349ff49de36db"
   license "MIT"
 
   depends_on arch: :arm64
