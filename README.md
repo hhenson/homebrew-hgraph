@@ -9,13 +9,13 @@ brew install hhenson/hgraph/hgl
 
 The formula installs a prebuilt `hgl` with the hgraph C++ SDK it builds
 programs against. Nothing is compiled to install it. Running a program on
-the C++ target compiles it, which needs the platform's C++ compiler.
+the C++ target compiles it and requires Apple Clang 21 or later.
 
 | Formula | What it installs | Platforms |
 | --- | --- | --- |
-| `hgl` | The HGL compiler | macOS on Apple silicon; Linux to follow |
+| `hgl` | HGL compiler with the hgraph C++ SDK | macOS 26 or later on Apple silicon |
 
-No release is published yet: the formula arrives with the first one.
+Upgrade with `brew upgrade hhenson/hgraph/hgl`.
 
 Report a problem with `hgl` at
 [hhenson/hgl-compiler](https://github.com/hhenson/hgl-compiler/issues), and
