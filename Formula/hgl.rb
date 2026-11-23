@@ -4,13 +4,13 @@
 class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.4/hgl-0.2.4-macos-arm64.tar.gz"
-  sha256 "2de9a801aad59d546d1cd5ee8c04f849b37f3b56fa3fb2fabed31b6b97de3c81"
+  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.5/hgl-0.2.5-macos-arm64.tar.gz"
+  sha256 "792acbcc39e267f305d53a592ca53259378d854cc1a2eebbf78847b7d77fa071"
   license "MIT"
 
   bottle do
-    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.4"
-    sha256 cellar: :any, arm64_tahoe: "788e5a2f6d557062fd515038c8d483681bdb26fe5f47b86e454af409121ad996"
+    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.5"
+    sha256 cellar: :any, arm64_tahoe: "35fb5e3e2892bc9987983ea6928aa69b9729d212f64dde182750ea97d03f7a2d"
   end
 
   depends_on arch: :arm64
@@ -21,6 +21,23 @@ class Hgl < Formula
   def install
     libexec.install Dir["*"]
     bin.install_symlink libexec/"bin/hgl"
+
+    # hgl-debug installs into a keg of its own. Link its debug libraries, and the
+    # symbol file of each library here, through its opt path, which follows its
+    # upgrades. The links lead nowhere until it is installed. They are made with
+    # ln_sf: install_symlink resolves the opt path to a versioned keg when
+    # hgl-debug is already installed.
+    debug = HOMEBREW_PREFIX/"opt/hgl-debug/libexec/libexec"
+    links = { libexec/"libexec" => [debug/"hgraph-debug"] }
+    %w[hgraph-sdk hgraph-deps].each do |prefix|
+      lib = libexec/"libexec"/prefix/"lib"
+      links[lib] = lib.glob("*.dylib").reject(&:symlink?).map do |dylib|
+        debug/prefix/"lib/#{File.basename(dylib.dylib_id)}.dSYM"
+      end
+    end
+    links.each do |dir, targets|
+      targets.each { |target| ln_sf target.relative_path_from(dir), dir/target.basename }
+    end
   end
 
   def caveats
