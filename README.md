@@ -15,6 +15,10 @@ and uses the CMake and Ninja installed by Homebrew.
 | Formula | What it installs | Platforms |
 | --- | --- | --- |
 | `hgl` | HGL compiler with the hgraph C++ SDK | macOS 26 or later on Apple silicon |
+| `hgl-debug` | hgraph's libraries built for debugging, and symbol files for `hgl`'s | macOS 26 or later on Apple silicon |
+
+With `hgl-debug`, a debug build (`hgl run --debug-build`) steps into hgraph's own code, and a debugger names the file and line of hgraph's frames.
+Nobody needs it to build or run a program.
 
 Upgrade with `brew upgrade hhenson/hgraph/hgl`.
 
