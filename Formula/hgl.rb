@@ -4,8 +4,13 @@
 class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7/hgl-0.2.7-macos-arm64.tar.gz"
-  sha256 "541d17e40fc2732449e61f32f38e70062d3dfdec57d8a1d1e647b2e6cdf0bda5"
+  if OS.linux?
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7/hgl-0.2.7-linux-x86_64.tar.gz"
+    sha256 "7f6c9e958b938e1ba5874f95c525e76177c4bed761e6da4969425dc241e34883"
+  else
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7/hgl-0.2.7-macos-arm64.tar.gz"
+    sha256 "541d17e40fc2732449e61f32f38e70062d3dfdec57d8a1d1e647b2e6cdf0bda5"
+  end
   license "MIT"
 
   bottle do
@@ -13,14 +18,26 @@ class Hgl < Formula
     sha256 cellar: :any, arm64_tahoe: "a849c5fd192f438f070157496a19025a97d9ca9fbe71fdac96dc422179acf6ef"
   end
 
-  depends_on arch: :arm64
   depends_on "cmake"
-  depends_on macos: :tahoe
   depends_on "ninja"
 
+  on_macos do
+    depends_on arch: :arm64
+    depends_on macos: :tahoe
+  end
+
+  on_linux do
+    depends_on arch: :x86_64
+  end
+
   def install
+    if OS.linux? && OS::Linux::Glibc.system_version < Version.new("2.43")
+      odie "The Linux HGL release requires system glibc 2.43 or later. Use Ubuntu 26.04 LTS."
+    end
+
     libexec.install Dir["*"]
     bin.install_symlink libexec/"bin/hgl"
+    return unless OS.mac?
 
     # hgl-debug installs into a keg of its own. Link its debug libraries, and the
     # symbol file of each library here, through its opt path, which follows its
@@ -41,16 +58,24 @@ class Hgl < Formula
   end
 
   def caveats
-    <<~EOS
-      This release requires macOS 26 or later on Apple silicon.
-      Running HGL programs on the C++ target requires Apple Clang 21 or later.
-    EOS
+    if OS.linux?
+      <<~EOS
+        This release supports x86-64 Ubuntu 26.04 LTS with system glibc 2.43 and libstdc++.
+        Running HGL programs on the C++ target requires Ubuntu's g++-15.
+      EOS
+    else
+      <<~EOS
+        This release requires macOS 26 or later on Apple silicon.
+        Running HGL programs on the C++ target requires Apple Clang 21 or later.
+      EOS
+    end
   end
 
   test do
     ENV.delete("HGL_HGRAPH_SDK")
     ENV.delete("HGL_HGRAPH_DEPS")
     ENV["HGL_NATIVE_CACHE"] = (testpath/"native-cache").to_s
+    ENV["CXX"] = "/usr/bin/g++-15" if OS.linux?
 
     assert_match "hgl #{version}", shell_output("#{bin}/hgl --version")
     (testpath/"smoke.hgl").write <<~HGL

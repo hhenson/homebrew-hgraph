@@ -1,0 +1,45 @@
+name: Linux Homebrew formula
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  linux-formula:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 20
+    env:
+      FORMULA: hhenson/hgraph/hgl
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+    steps:
+      - name: Verify the Ubuntu C++ toolchain
+        shell: bash
+        run: |
+          test "$(uname -m)" = x86_64
+          test "$(getconf GNU_LIBC_VERSION)" = 'glibc 2.43'
+          sudo apt-get update
+          sudo apt-get install -y g++-15
+          test "$(/usr/bin/g++-15 -dumpversion)" = 15
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@63a2d4d8d4193eab3e62b1b782ff3ab8408f5b29 # 2026.11.09.1
+        with:
+          stable: true
+
+      - name: Audit, install, and test hgl from this tap revision
+        shell: bash
+        env:
+          TAP_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          tap=$(brew --repo hhenson/hgraph)
+          git -C "$tap" fetch --no-tags origin "$TAP_SHA"
+          git -C "$tap" checkout --detach "$TAP_SHA"
+          test "$(git -C "$tap" rev-parse HEAD)" = "$TAP_SHA"
+          brew trust --formula "$FORMULA"
+          brew audit --strict "$FORMULA"
+          brew install "$FORMULA"
+          brew test "$FORMULA"
