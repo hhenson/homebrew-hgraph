@@ -4,13 +4,13 @@
 class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.5/hgl-0.2.5-macos-arm64.tar.gz"
-  sha256 "792acbcc39e267f305d53a592ca53259378d854cc1a2eebbf78847b7d77fa071"
+  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7/hgl-0.2.7-macos-arm64.tar.gz"
+  sha256 "541d17e40fc2732449e61f32f38e70062d3dfdec57d8a1d1e647b2e6cdf0bda5"
   license "MIT"
 
   bottle do
-    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.5"
-    sha256 cellar: :any, arm64_tahoe: "35fb5e3e2892bc9987983ea6928aa69b9729d212f64dde182750ea97d03f7a2d"
+    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7"
+    sha256 cellar: :any, arm64_tahoe: "a849c5fd192f438f070157496a19025a97d9ca9fbe71fdac96dc422179acf6ef"
   end
 
   depends_on arch: :arm64

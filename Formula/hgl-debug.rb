@@ -4,8 +4,8 @@
 class HglDebug < Formula
   desc "Debugging libraries and symbol files for the HGL compiler's hgraph SDK"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.5/hgl-debug-0.2.5-macos-arm64.tar.gz"
-  sha256 "43e8c3149287fec60c452870dbb7ad9d174995d4daf7ce4742183410593f0942"
+  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.7/hgl-debug-0.2.7-macos-arm64.tar.gz"
+  sha256 "c81221321703ca50edbdc31e4bc46cb8f66bed67f5eae868830c4971ae31bbbb"
   license all_of: ["MIT", "Apache-2.0"]
 
   depends_on arch: :arm64
@@ -15,7 +15,8 @@ class HglDebug < Formula
   def install
     # The symbol files belong to one build of hgl's libraries.
     hgl = Formula["hhenson/hgraph/hgl"].any_installed_version
-    odie "hgl-debug #{version} needs hgl #{version}; installed hgl: #{hgl || "none"}" if hgl&.version != version
+    installed = hgl || "none"
+    odie "hgl-debug #{version} needs hgl #{version}; installed hgl: #{installed}" if hgl&.version != version
 
     libexec.install Dir["*"]
   end
