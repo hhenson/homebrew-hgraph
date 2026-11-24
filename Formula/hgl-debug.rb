@@ -15,7 +15,8 @@ class HglDebug < Formula
   def install
     # The symbol files belong to one build of hgl's libraries.
     hgl = Formula["hhenson/hgraph/hgl"].any_installed_version
-    odie "hgl-debug #{version} needs hgl #{version}; installed hgl: #{hgl || "none"}" if hgl&.version != version
+    installed = hgl || "none"
+    odie "hgl-debug #{version} needs hgl #{version}; installed hgl: #{installed}" if hgl&.version != version
 
     libexec.install Dir["*"]
   end
