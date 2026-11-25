@@ -5,18 +5,13 @@ class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
   if OS.linux?
-    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.8/hgl-0.2.8-linux-x86_64.tar.gz"
-    sha256 "c94c9ce2a6545ecf3dc27a94c7c48675d3fc555026ed9602140d5e57545be0aa"
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.9/hgl-0.2.9-linux-x86_64.tar.gz"
+    sha256 "eb5be76d458b57f4af9dbe26897b1507963aaa01a967d6e4e4f82b29114b9d03"
   else
-    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.8/hgl-0.2.8-macos-arm64.tar.gz"
-    sha256 "81be1bca972a6ad0b484f7dcae48cad4b600634fea6e42055353830b49b99525"
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.9/hgl-0.2.9-macos-arm64.tar.gz"
+    sha256 "f53933b2e4b8c8ef69bee7e28ec84a9947572adcb1822035583a40fbd70c0ea3"
   end
   license "MIT"
-
-  bottle do
-    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.8"
-    sha256 cellar: :any, arm64_tahoe: "ac49e3838dd7c3fd368a169bb84a5461bc098457e1b3cda8dad64bacbc23842d"
-  end
 
   depends_on "cmake"
   depends_on "ninja"
