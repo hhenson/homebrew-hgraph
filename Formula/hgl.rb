@@ -13,6 +13,11 @@ class Hgl < Formula
   end
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.11"
+    sha256 cellar: :any, arm64_tahoe: "174aba07a3b9584afae9163c5ed59fe7765dd6f5a188198766f3a0322bfcd813"
+  end
+
   depends_on "cmake"
   depends_on "ninja"
 
