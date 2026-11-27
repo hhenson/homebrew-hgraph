@@ -4,8 +4,8 @@
 class HglDebug < Formula
   desc "Debugging libraries and symbol files for the HGL compiler's hgraph SDK"
   homepage "https://github.com/hhenson/hgl-compiler"
-  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.12/hgl-debug-0.2.12-macos-arm64.tar.gz"
-  sha256 "c01ff0e5ca106ef8782effee081dc4e7d37904a421689220e5b24be57690a552"
+  url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.13/hgl-debug-0.2.13-macos-arm64.tar.gz"
+  sha256 "cf735e34c6d9272620d5225a6d3a6fdc0c24d43ecc185786bc982fad3b00fcbe"
   license all_of: ["MIT", "Apache-2.0"]
 
   depends_on arch: :arm64
