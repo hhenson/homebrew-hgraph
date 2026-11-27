@@ -5,17 +5,17 @@ class Hgl < Formula
   desc "Compiler for the HGL language"
   homepage "https://github.com/hhenson/hgl-compiler"
   if OS.linux?
-    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.12/hgl-0.2.12-linux-x86_64.tar.gz"
-    sha256 "79df73d10f9e807b191e46648a40ae7b561ea5af0dcefb833c56dbfdb70c4d4c"
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.13/hgl-0.2.13-linux-x86_64.tar.gz"
+    sha256 "0d055039b3100467ddbb84216515d3f0a234ec0b66a66efee85a2ab0e59e1381"
   else
-    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.12/hgl-0.2.12-macos-arm64.tar.gz"
-    sha256 "57996676dcf69f385fec023076be3a6b9a6405d37a49116701b6370eccd89672"
+    url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.13/hgl-0.2.13-macos-arm64.tar.gz"
+    sha256 "d711520fd005d2f8ad9d6e98dbcd0117253486bc86989bf4215c3e6f2fad8cd3"
   end
   license "MIT"
 
   bottle do
-    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.12"
-    sha256 cellar: :any, arm64_tahoe: "e14fa4f10c6286176dd6fe221515e15cb5668ca10a2ab0359338f15d1035e2f3"
+    root_url "https://github.com/hhenson/hgl-compiler/releases/download/0.2.13"
+    sha256 cellar: :any, arm64_tahoe: "6e276ed87d9a6e3f9f9e1573fd871e4584f8d162c13cf2ad0f73cfa458eb7003"
   end
 
   depends_on "cmake"
